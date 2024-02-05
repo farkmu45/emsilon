@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input-base {
+    @apply border-base-300 focus:border-base-300 focus:outline-base-300 autofill:!bg-transparent;
+}
