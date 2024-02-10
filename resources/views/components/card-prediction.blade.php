@@ -8,7 +8,7 @@
           <p>Oryza Sativa</p>
         </div>
         <div class="flex flex-row items-center gap-x-2 text-gray-500">
-          <x-heroicon-o-sun class="h-5" />
+          <x-heroicon-o-clock class="h-5" />
           <p>2 minutes ago</p>
         </div>
       </div>
