@@ -7,7 +7,7 @@ use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 use Illuminate\Validation\ValidationException;
 
-new #[Layout('layouts.guest')] class extends Component {
+new #[Layout('components.layouts.guest')] class extends Component {
     public string $email = '';
     public string $password = '';
     public bool $remember = false;
@@ -73,16 +73,16 @@ new #[Layout('layouts.guest')] class extends Component {
 <div>
   <form class="flex flex-col" wire:submit="login">
     <div>
-      <x-mary-input class="input-base" label="Email" wire:model="email" required />
+      <x-input class="input-base" label="Email" wire:model="email" required />
     </div>
 
     <div class="mt-4">
-      <x-mary-input class="input-base" label="Password" wire:model="password" required
+      <x-input class="input-base" label="Password" wire:model="password" required
         autocomplete="current-password" />
     </div>
 
     <div class="mt-4 flex justify-between">
-      <x-mary-toggle label="Remember me" wire:model="remember" />
+      <x-toggle label="Remember me" wire:model="remember" />
 
       <a class="link ml-auto no-underline" href="{{ route('password.request') }}" wire:navigate>
         Forgot password?
@@ -90,8 +90,8 @@ new #[Layout('layouts.guest')] class extends Component {
     </div>
 
 
-    <x-mary-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-mary-button>
-    <x-mary-button class="mt-5" spinner="googleLogin" type="submit">Login with Google</x-mary-button>
+    <x-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-button>
+    <x-button class="mt-5" spinner="googleLogin" type="submit">Login with Google</x-button>
 
     <a class="link ml-auto mt-8 no-underline" href="{{ route('register') }}" wire:navigate>
       Create new account
