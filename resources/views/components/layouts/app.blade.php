@@ -34,10 +34,10 @@
 
       {{-- MENU --}}
       <x-menu activate-by-route>
-        <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-        <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-        <x-menu-item title="Hello" icon="o-sparkles" link="/" />
-        <x-menu-item title="Hello" icon="o-sparkles" link="/" />
+        <x-menu-item title="Dashboard" icon="o-home" link="{{ route('dashboard') }}" />
+        <x-menu-item title="Browse" icon="o-magnifying-glass" link="/" />
+        <x-menu-item title="Group" icon="o-user-group" link="/" />
+        <x-menu-item title="Profile" icon="o-user" link="/" />
       </x-menu>
     </x-slot:sidebar>
 
