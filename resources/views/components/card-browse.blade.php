@@ -1,7 +1,7 @@
 <x-card>
   <div class="flex items-center justify-between">
     <div>
-      <p class="mb-4 text-lg font-medium">Successful treatment</p>
+      <p class="mb-4 text-lg font-medium">Oryza Sativa</p>
       <div class="flex flex-row items-center gap-x-2 text-gray-500">
         <x-heroicon-o-user class="h-5" />
         <p>Dani</p>
@@ -15,7 +15,7 @@
       <div>
         <x-dropdown>
           <x-slot:trigger>
-            <x-heroicon-o-ellipsis-horizontal class="w-8 text-gray-500" />
+            <x-heroicon-o-ellipsis-horizontal class="w-8 text-gray-500 cursor-pointer" />
           </x-slot:trigger>
           <x-menu-item title="Use as base" />
         </x-dropdown>
