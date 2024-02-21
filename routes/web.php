@@ -28,6 +28,9 @@ Route::middleware(['auth'])->group(function () {
 
     Volt::route('browse', 'browse')
         ->name('browse');
+
+    Volt::route('predictions/create', 'predictions.create')
+        ->name('predictions.create');
 });
 
 require __DIR__ . '/auth.php';

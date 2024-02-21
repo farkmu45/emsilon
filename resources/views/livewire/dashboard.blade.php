@@ -26,7 +26,8 @@ new class extends Component {
     <x-card-prediction />
   </div>
 
-  <x-button class="btn-primary fixed bottom-24 right-7 lg:bottom-16 lg:right-16" icon="o-cube-transparent">
+  <a class="btn btn-primary fixed bottom-24 right-7 lg:bottom-16 lg:right-16" href="{{ route('predictions.create') }}"
+    wire:navigate icon="o-cube-transparent">
     Analyze
-  </x-button>
+  </a>
 </div>
