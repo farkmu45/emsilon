@@ -16,7 +16,7 @@ new class extends Component {
 
   <div class="mt-10 flex justify-between">
     <h2 class="text-xl font-semibold">Recent Analysis</h2>
-    <a class="flex items-center gap-x-3 uppercase text-primary" href="">
+    <a class="flex items-center gap-x-3 uppercase text-primary" href="{{ route('predictions.index') }}" wire:navigate>
       See all
       <x-heroicon-o-arrow-right class="h-5" />
     </a>
