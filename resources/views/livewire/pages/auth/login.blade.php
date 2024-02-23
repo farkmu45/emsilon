@@ -27,8 +27,8 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $this->redirect(session('url.intended', RouteServiceProvider::HOME), navigate: true);
     }
 
-    public function googleLogin(): void {
-
+    public function googleLogin(): void
+    {
     }
 
     public function authenticate(): void
@@ -71,17 +71,10 @@ new #[Layout('components.layouts.guest')] class extends Component {
 }; ?>
 
 <div>
-  <form class="flex flex-col" wire:submit="login">
-    <div>
-      <x-input class="input-base" label="Email" wire:model="email" required />
-    </div>
-
-    <div class="mt-4">
-      <x-input class="input-base" label="Password" wire:model="password" required
-        autocomplete="current-password" />
-    </div>
-
-    <div class="mt-4 flex justify-between">
+  <form class="grid gap-y-5" wire:submit="login">
+    <x-custom-input label="Email" wire:model="email" required />
+    <x-custom-input label="Password" wire:model="password" required />
+    <div class="flex justify-between">
       <x-toggle label="Remember me" wire:model="remember" />
 
       <a class="link ml-auto no-underline" href="{{ route('password.request') }}" wire:navigate>
@@ -91,9 +84,9 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
 
     <x-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-button>
-    <x-button class="mt-5" spinner="googleLogin" type="submit">Login with Google</x-button>
+    <x-button type="submit" spinner="googleLogin">Login with Google</x-button>
 
-    <a class="link ml-auto mt-8 no-underline" href="{{ route('register') }}" wire:navigate>
+    <a class="link ml-auto mt-4 no-underline" href="{{ route('register') }}" wire:navigate>
       Create new account
     </a>
   </form>

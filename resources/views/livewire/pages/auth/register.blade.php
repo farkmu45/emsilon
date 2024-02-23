@@ -37,17 +37,17 @@ new #[Layout('components.layouts.guest')] class extends Component {
 }; ?>
 
 <div>
-  <form class="flex flex-col gap-y-5" wire:submit="register">
-    <x-mary-input class="input-base" label="Name" wire:model="name" required autocomplete="name" autofocus />
+  <form class="grid gap-y-5" wire:submit="register">
+    <x-custom-input label="Name" wire:model="name" required autocomplete="name" autofocus />
 
-    <x-mary-input class="input-base" type="email" label="Email" wire:model="email" required autocomplete="email" />
+    <x-custom--input type="email" label="Email" wire:model="email" required autocomplete="email" />
 
-    <x-mary-input class="input-base" type="password" label="Password" wire:model="password" required />
+    <x-custom--input type="password" label="Password" wire:model="password" required />
 
-    <x-mary-input class="input-base" type="password" label="Confirm password" wire:model="password_confirmation"
+    <x-custom--input type="password" label="Confirm password" wire:model="password_confirmation"
       required />
 
-    <x-mary-button class="btn-primary mt-5" type="submit" spinner="register">Register</x-mary-button>
+    <x-button class="btn-primary mt-5" type="submit" spinner="register">Register</x-button>
 
     <a class="link ml-auto mt-5 no-underline" href="{{ route('login') }}" wire:navigate>Already registered?</a>
   </form>
