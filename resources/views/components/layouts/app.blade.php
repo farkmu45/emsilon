@@ -36,13 +36,13 @@
       <x-menu activate-by-route>
         <x-menu-item title="Dashboard" icon="o-home" link="{{ route('dashboard') }}" />
         <x-menu-item title="Browse" icon="o-magnifying-glass" link="{{ route('browse') }}" />
-        <x-menu-item title="Group" icon="o-user-group" link="/" />
+        <x-menu-item title="Groups" icon="o-user-group" link="{{ route('groups') }}" />
         <x-menu-item title="Profile" icon="o-user" link="/" />
       </x-menu>
     </x-slot:sidebar>
 
     {{-- The `$slot` goes here --}}
-    <x-slot:content class="bg-neutral-100 !pb-28 min-h-screen">
+    <x-slot:content class="min-h-screen bg-neutral-100 !pb-28">
       {{ $slot }}
     </x-slot:content>
   </x-main>
