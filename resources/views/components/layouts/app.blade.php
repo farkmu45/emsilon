@@ -43,7 +43,9 @@
 
     {{-- The `$slot` goes here --}}
     <x-slot:content class="min-h-screen bg-neutral-100 !pb-28">
-      {{ $slot }}
+      <div class="lg:max-w-screen-lg mx-auto lg:mt-10">
+        {{ $slot }}
+      </div>
     </x-slot:content>
   </x-main>
 
