@@ -23,8 +23,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('profile', 'profile')
         ->name('profile');
 
-    Volt::route('groups', 'groups')
-        ->name('groups');
+    Volt::route('groups', 'pages.groups.index')
+        ->name('groups.index');
 
     Volt::route('browse', 'browse')
         ->name('browse');

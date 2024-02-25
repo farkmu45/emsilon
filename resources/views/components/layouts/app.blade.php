@@ -36,7 +36,7 @@
       <x-menu activate-by-route>
         <x-menu-item title="Dashboard" icon="o-home" link="{{ route('dashboard') }}" />
         <x-menu-item title="Browse" icon="o-magnifying-glass" link="{{ route('browse') }}" />
-        <x-menu-item title="Groups" icon="o-user-group" link="{{ route('groups') }}" />
+        <x-menu-item title="Groups" icon="o-user-group" link="{{ route('groups.index') }}" />
         <x-menu-item title="Profile" icon="o-user" link="/" />
       </x-menu>
     </x-slot:sidebar>
