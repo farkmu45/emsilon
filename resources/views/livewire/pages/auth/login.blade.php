@@ -72,8 +72,8 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
 <div>
   <form class="grid gap-y-5" wire:submit="login">
-    <x-custom-input label="Email" wire:model="email" required />
-    <x-custom-input label="Password" wire:model="password" required />
+    <x-custom-input label="Email" wire:model="email" autofocus required />
+    <x-custom-input label="Password" type="password" wire:model="password" required />
     <div class="flex justify-between">
       <x-toggle label="Remember me" wire:model="remember" />
 
