@@ -29,7 +29,7 @@
       {{-- BRAND --}}
       <div class="flex h-20 items-center gap-3 p-6 pt-3">
         <x-icon class="text-primary" name="o-square-3-stack-3d" />
-        <div class="hidden-when-collapsed">App</div>
+        <div class="hidden-when-collapsed">{{ config('app.name', 'Laravel') }}</div>
       </div>
 
       {{-- MENU --}}
@@ -43,7 +43,7 @@
 
     {{-- The `$slot` goes here --}}
     <x-slot:content class="min-h-screen bg-neutral-100 !pb-28">
-      <div class="lg:max-w-screen-lg mx-auto lg:mt-10">
+      <div class="mx-auto lg:mt-10 lg:max-w-screen-lg">
         {{ $slot }}
       </div>
     </x-slot:content>
