@@ -21,9 +21,9 @@ new class extends Component {}; ?>
     <x-member-item />
   </div>
 
-  <div class="flex flex-col mt-10">
-    <a href="" class="btn btn-primary">Invite friends</a>
-    <button class="btn btn-error text-white mt-3" onclick="disbandModal.showModal()">Disband group</button>
+  <div class="mt-10 flex flex-col">
+    <a class="btn btn-primary" href="">Invite friends</a>
+    <button class="btn btn-error mt-3 text-white" onclick="disbandModal.showModal()">Disband group</button>
   </div>
 
 
@@ -32,9 +32,9 @@ new class extends Component {}; ?>
     All predictions created will be deleted permanently.
 
     <x-slot:actions>
-        {{-- Notice `onclick` is HTML --}}
-        <x-button label="Cancel" onclick="disbandModal.close()" />
-        <x-button label="Confirm" class="btn-primary" />
+      {{-- Notice `onclick` is HTML --}}
+      <x-button label="Cancel" onclick="disbandModal.close()" />
+      <x-button class="btn-primary" label="Confirm" />
     </x-slot:actions>
-</x-modal>
+  </x-modal>
 </div>
