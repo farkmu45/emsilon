@@ -20,7 +20,8 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('dashboard', 'dashboard')
         ->name('dashboard');
 
-    Volt::route('profile', 'profile')
+    // Profile
+    Volt::route('profile', 'pages.profile.index')
         ->name('profile');
 
     // Groups
