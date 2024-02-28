@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('profile', 'profile')
         ->name('profile');
 
+    // Groups
     Route::prefix('groups')->name('groups.')->group(function () {
         Volt::route('/', 'pages.groups.index')
             ->name('index');
@@ -35,11 +36,14 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('browse', 'browse')
         ->name('browse');
 
-    Volt::route('predictions/create', 'pages.predictions.create')
-        ->name('predictions.create');
+    // Predictions
+    Route::prefix('predictions')->name('predictions.')->group(function () {
+        Volt::route('/', 'pages.predictions.index')
+            ->name('index');
 
-    Volt::route('predictions', 'pages.predictions.index')
-        ->name('predictions.index');
+        Volt::route('create', 'pages.predictions.create')
+            ->name('create');
+    });
 });
 
 require __DIR__ . '/auth.php';
