@@ -6,7 +6,7 @@ new class extends Component {
 }; ?>
 
 <div>
-  <h1 class="text-3xl font-bold">Hi John</h1>
+  <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
   <h3 class="mt-2 text-lg font-medium text-neutral-600">Summary of your past analysis</h3>
 
   <div class="mt-4 grid grid-cols-2 gap-x-4">
