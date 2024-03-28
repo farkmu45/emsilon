@@ -6,8 +6,16 @@ new class extends Component {
 }; ?>
 
 <div>
-  <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
-  <h3 class="mt-2 text-lg font-medium text-neutral-600">Summary of your past analysis</h3>
+  <div class="items-center flex">
+    <div>
+      <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
+      <h3 class="mt-2 text-lg font-medium text-neutral-600">Summary of your past analysis</h3>
+    </div>
+    <a class="btn lg:ml-auto btn-primary fixed bottom-28 right-7 lg:static" href="{{ route('predictions.create') }}"
+      icon="o-cube-transparent">
+      Predict
+    </a>
+  </div>
 
   <div class="mt-4 grid grid-cols-2 gap-x-4">
     <x-stat value="44" title="Avg success rate" tooltip="Hello" />
@@ -16,7 +24,8 @@ new class extends Component {
 
   <div class="mt-10 flex justify-between">
     <h2 class="text-xl font-semibold">Recent Analysis</h2>
-    <a class="flex items-center gap-x-3 uppercase text-primary" href="{{ route('predictions.index') }}">
+    <a class="flex items-center gap-x-3 text-sm font-medium uppercase tracking-wide text-primary"
+      href="{{ route('predictions.index') }}">
       See all
       <x-heroicon-o-arrow-right class="h-5" />
     </a>
@@ -26,8 +35,4 @@ new class extends Component {
     <x-card-prediction />
   </div>
 
-  <a class="btn btn-primary fixed bottom-24 right-7 lg:bottom-16 lg:right-16" href="{{ route('predictions.create') }}"
-    icon="o-cube-transparent">
-    Predict
-  </a>
 </div>
