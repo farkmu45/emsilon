@@ -30,7 +30,7 @@ new class extends Component {
     <form class="flex flex-col" wire:submit="predict">
       <div class="grid gap-y-4 lg:grid-cols-2 lg:gap-4">
         <x-custom-select label="Species" :options="$species" wire:model="form.species_id" />
-        <x-custom-input type="number" label="EMS concentration" wire:model="form.ems_concentration" required
+        <x-custom-input type="number" step="0.01" label="EMS concentration" wire:model="form.ems_concentration" required
           suffix="%" />
         <x-custom-input type="number" label="First soak duration" wire:model="form.first_soak_duration" required
           suffix="Minutes" />
