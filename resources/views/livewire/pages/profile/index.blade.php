@@ -1,5 +1,6 @@
 <?php
 use Livewire\Volt\Component;
+use App\Livewire\Actions\Logout;
 
 new class extends Component {
     public string $email = '';
@@ -14,6 +15,12 @@ new class extends Component {
         $this->email = $user->email;
         $this->name = $user->name;
         $this->name = $user->name;
+    }
+
+    public function logout(Logout $logout): void
+    {
+        $logout();
+        $this->redirect('/login');
     }
 }; ?>
 
@@ -38,7 +45,7 @@ new class extends Component {
         <x-custom-input label="New password confirmation" wire:model="newPasswordConfirmation" />
 
         <x-button class="btn-primary mt-10" type="submit" spinner="save">Save</x-button>
-        <x-button class="btn-error text-white" spinner="save">Logout</x-button>
+        <x-button class="btn-error text-white" wire:click="logout" spinner="logout">Logout</x-button>
       </form>
     </div>
 

@@ -24,7 +24,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
         Session::regenerate();
 
-        $this->redirect(session('url.intended', RouteServiceProvider::HOME), navigate: true);
+        $this->redirect(session('url.intended', RouteServiceProvider::HOME));
     }
 
     public function googleLogin(): void
@@ -77,7 +77,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
     <div class="flex justify-between">
       <x-toggle label="Remember me" wire:model="remember" />
 
-      <a class="link ml-auto no-underline" href="{{ route('password.request') }}" wire:navigate>
+      <a class="link ml-auto no-underline" href="{{ route('password.request') }}">
         Forgot password?
       </a>
     </div>
@@ -86,7 +86,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
     <x-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-button>
     <x-button type="submit" spinner="googleLogin">Login with Google</x-button>
 
-    <a class="link ml-auto mt-4 no-underline" href="{{ route('register') }}" wire:navigate>
+    <a class="link ml-auto mt-4 no-underline" href="{{ route('register') }}">
       Create new account
     </a>
   </form>

@@ -32,7 +32,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
         Auth::login($user);
 
-        $this->redirect(RouteServiceProvider::HOME, navigate: true);
+        $this->redirect(RouteServiceProvider::HOME);
     }
 }; ?>
 
@@ -49,6 +49,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
     <x-button class="btn-primary mt-5" type="submit" spinner="register">Register</x-button>
 
-    <a class="link ml-auto mt-5 no-underline" href="{{ route('login') }}" wire:navigate>Already registered?</a>
+    <a class="link ml-auto mt-5 no-underline" href="{{ route('login') }}">Already registered?</a>
   </form>
 </div>
