@@ -15,6 +15,7 @@ class SpeciesSeeder extends CsvSeeder
         $this->file = '/database/species.csv';
         $this->timestamps = false;
         $this->delimiter = ',';
+        $this->foreignKeyCheck = false;
     }
 
     /**

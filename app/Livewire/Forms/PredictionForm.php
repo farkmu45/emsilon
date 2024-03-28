@@ -2,13 +2,16 @@
 
 namespace App\Livewire\Forms;
 
+use App\Models\Prediction;
 use App\Models\Species;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
+use Mary\Exceptions\ToastException;
 
 class PredictionForm extends Form
 {
+
     #[Validate('required|numeric')]
     public float $ems_concentration = 0;
 
@@ -45,9 +48,23 @@ class PredictionForm extends Form
 
         $data = $this->all();
         $data['result'] = $result['result'];
-        $data['success_rate'] = $result['success_rate'];
-        dd($data);
+        $data['success_rate'] = intval($result['success_rate']);
+        $data['user_id'] = auth()->user()->id;
 
-        dd($this->all());
+        $created = Prediction::create($data);
+
+        if ($created) {
+            throw ToastException::success(
+                title: 'Prediction created successfully',
+                position: 'toast-top toast-end',    // optional (daisyUI classes)
+                icon: 'o-information-circle',       // Optional (any icon)
+            );
+        } else {
+            throw ToastException::error(
+                title: 'An error occured while creating prediction',
+                position: 'toast-top toast-end',    // optional (daisyUI classes)
+                icon: 'o-information-circle',       // Optional (any icon)
+            );
+        }
     }
 }
