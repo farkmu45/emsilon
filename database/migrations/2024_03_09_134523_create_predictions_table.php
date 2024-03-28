@@ -35,7 +35,7 @@ return new class extends Migration
             $table->float('lowest_temperature', unsigned: true);
             $table->float('highest_temperature', unsigned: true);
             $table->boolean('result');
-            $table->float('success_rate', unsigned: true);
+            $table->unsignedMediumInteger('success_rate');
             $table->timestamps();
         });
     }
