@@ -16,7 +16,7 @@ new class extends Component {
 
   <div class="mt-10 flex justify-between">
     <h2 class="text-xl font-semibold">Recent Analysis</h2>
-    <a class="flex items-center gap-x-3 uppercase text-primary" href="{{ route('predictions.index') }}" wire:navigate>
+    <a class="flex items-center gap-x-3 uppercase text-primary" href="{{ route('predictions.index') }}">
       See all
       <x-heroicon-o-arrow-right class="h-5" />
     </a>
@@ -27,7 +27,7 @@ new class extends Component {
   </div>
 
   <a class="btn btn-primary fixed bottom-24 right-7 lg:bottom-16 lg:right-16" href="{{ route('predictions.create') }}"
-    wire:navigate icon="o-cube-transparent">
-    Analyze
+    icon="o-cube-transparent">
+    Predict
   </a>
 </div>
