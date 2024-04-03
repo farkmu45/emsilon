@@ -44,6 +44,9 @@ Route::middleware(['auth'])->group(function () {
 
         Volt::route('create', 'pages.predictions.create')
             ->name('create');
+
+        Volt::route('{prediction}', 'pages.predictions.show')
+            ->name('show');
     });
 });
 

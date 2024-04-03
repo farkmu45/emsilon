@@ -1,17 +1,26 @@
 <?php
 use Livewire\Volt\Component;
+use App\Models\Prediction;
 
 new class extends Component {
-    public $count = 0;
+    public $perPage = 10;
+    public $predictions;
+
+    public function mount()
+    {
+        $this->predictions = Prediction::latest()
+            ->paginate($this->perPage)
+            ->items();
+    }
 }; ?>
 
 <div>
-  <div class="items-center flex">
+  <div class="flex items-center">
     <div>
       <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
-      <h3 class="mt-2 text-lg font-medium text-neutral-600">Summary of your past analysis</h3>
+      <h3 class="mt-2 text-neutral-600">Summary of your past analysis</h3>
     </div>
-    <a class="btn lg:ml-auto btn-primary fixed bottom-28 right-7 lg:static" href="{{ route('predictions.create') }}"
+    <a class="btn btn-primary fixed bottom-28 right-7 lg:static lg:ml-auto" href="{{ route('predictions.create') }}"
       icon="o-cube-transparent">
       Predict
     </a>
@@ -32,7 +41,11 @@ new class extends Component {
   </div>
 
   <div class="mt-4 grid gap-y-4">
-    <x-card-prediction />
+    @foreach ($predictions as $prediction)
+      <x-card-prediction result="{{ $prediction->result }}" species="{{ $prediction->species->name }}"
+        successRate="{{ $prediction->success_rate }}" createdAt="{{ $prediction->created_at }}"
+        link="{{ route('predictions.show', $prediction->id) }}" />
+    @endforeach
   </div>
 
 </div>

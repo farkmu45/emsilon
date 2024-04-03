@@ -16,4 +16,9 @@ class Prediction extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function species(): BelongsTo
+    {
+        return $this->belongsTo(Species::class);
+    }
 }
