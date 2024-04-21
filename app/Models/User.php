@@ -49,6 +49,6 @@ class User extends Authenticatable
             Member::where('user_id', $this->id)
                 ->get('group_id')
                 ->toArray()
-        )->get();
+        )->where('name', '!=', 'Personal')->get();
     }
 }
