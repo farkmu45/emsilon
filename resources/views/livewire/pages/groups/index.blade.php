@@ -60,6 +60,9 @@ new class extends Component {
   </div>
 
   <div class="mt-10 grid gap-4 lg:grid-cols-3">
+    @foreach ($this->selectedGroup->predictions as $prediction)
+      <x-card-prediction :link="route('predictions.show', $prediction->id)" :result="$prediction->result" :species="$prediction->species->name" :createdAt="$prediction->created_at" :successRate="$prediction->success_rate" />
+    @endforeach
   </div>
 
   {{-- Create group modal --}}

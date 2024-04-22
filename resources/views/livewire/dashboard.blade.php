@@ -8,7 +8,9 @@ new class extends Component {
 
     public function mount()
     {
-        $this->predictions = Prediction::latest()
+        $personalGroup = auth()->user()->personalGroup();
+        $this->predictions = Prediction::where('group_id', $personalGroup->id)
+            ->latest()
             ->paginate($this->perPage)
             ->items();
     }

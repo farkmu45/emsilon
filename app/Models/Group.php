@@ -15,4 +15,9 @@ class Group extends Model
     public function members() : HasMany {
         return $this->hasMany(Member::class);
     }
+
+    public function predictions(): HasMany
+    {
+        return $this->hasMany(Prediction::class);
+    }
 }

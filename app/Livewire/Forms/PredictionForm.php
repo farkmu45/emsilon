@@ -32,7 +32,7 @@ class PredictionForm extends Form
 
 
     #[Validate('required|numeric|exists:groups,id')]
-    public int $group_id = 1;
+    public ?int $group_id = null;
 
 
     public function predict()
