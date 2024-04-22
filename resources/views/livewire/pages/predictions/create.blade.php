@@ -13,7 +13,8 @@ new class extends Component {
     public function mount()
     {
         $this->species = Species::all();
-        $this->groups = auth()->user()->groups();
+        $this->groups = auth()->user()->groupsWithPersonal();
+        $this->form->group_id = auth()->user()->personalGroup()->id;
     }
 
     public function predict()
@@ -41,7 +42,7 @@ new class extends Component {
         <x-custom-input type="number" label="Highest temperature" wire:model="form.highest_temperature" required
           suffix="Celsius" />
         <div class="col-span-full">
-          <x-custom-select label="Group" hint="Where do you want to store the prediction?" :options="$groups" wire:model="form.species_id" />
+          <x-custom-select label="Group" hint="Where do you want to store the prediction?" :options="$groups" wire:model="form.group_id" />
         </div>
       </div>
 
