@@ -42,6 +42,15 @@ class User extends Authenticatable
         });
     }
 
+    public function personalGroup() {
+        return Group::whereIn(
+            'id',
+            Member::where('user_id', $this->id)
+                ->get('group_id')
+                ->toArray()
+        )->where('name', 'Personal')->first();
+    }
+
     public function groups()
     {
         return Group::whereIn(
@@ -50,5 +59,14 @@ class User extends Authenticatable
                 ->get('group_id')
                 ->toArray()
         )->where('name', '!=', 'Personal')->get();
+    }
+
+    public function groupsWithPersonal() {
+        return Group::whereIn(
+            'id',
+            Member::where('user_id', $this->id)
+                ->get('group_id')
+                ->toArray()
+        )->get();
     }
 }
