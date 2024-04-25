@@ -9,9 +9,9 @@ new class extends Component {
 
 <div>
   <div class="text-center">
-    <h1 class="text-xl font-semibold">Group 1</h1>
+    <h1 class="text-xl font-semibold">{{ $group->name }}</h1>
     <div class="mt-10 flex justify-center">
-      <h3 class="text-2xl font-semibold">341 256 783</h3>
+      <h3 class="text-2xl font-semibold">{{ $group->code }}</h3>
       <x-heroicon-o-clipboard-document class="ml-1 h-4 text-primary" />
     </div>
     <p class="mt-5">This is the code for this group, others can use this code to join this group</p>
