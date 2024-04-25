@@ -42,7 +42,11 @@ new class extends Component {
 }; ?>
 
 <div>
-  <h1 class="text-3xl font-bold">Your Groups</h1>
+  <div class="flex items-center">
+    <h1 class="text-3xl font-bold">Your Groups</h1>
+    <a class="link ml-auto font-medium text-primary no-underline"
+      href="{{ $this->selectedGroup ? route('groups.detail', $this->selectedGroup->id) : '/groups/#' }}">Edit group</a>
+  </div>
 
   <div class="mt-5 flex">
     <button class="flex w-20 flex-col items-center" @click="$wire.createModal = true">
@@ -60,9 +64,11 @@ new class extends Component {
   </div>
 
   <div class="mt-10 grid gap-4 lg:grid-cols-3">
-    @foreach ($this->selectedGroup->predictions as $prediction)
+    @forelse ($this->selectedGroup->predictions ?? [] as $prediction)
       <x-card-prediction :link="route('predictions.show', $prediction->id)" :result="$prediction->result" :species="$prediction->species->name" :createdAt="$prediction->created_at" :successRate="$prediction->success_rate" />
-    @endforeach
+    @empty
+        Empty
+    @endforelse
   </div>
 
   {{-- Create group modal --}}
