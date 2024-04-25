@@ -59,7 +59,8 @@ new class extends Component {
 
     @foreach ($groups as $group)
       <x-group-avatar name="{{ $group->name }}" wire:click="changeActiveGroup({{ $group }})"
-        active="{{ $group->id == $selectedGroup->id }}" wire:key="{{ $group->id }}" />
+        active="{{ $group->id == $selectedGroup->id }}"
+        creator="{{ $this->selectedGroup->members->where('is_creator', true)->first()->user->name }}" wire:key="{{ $group->id }}" />
     @endforeach
   </div>
 
@@ -67,7 +68,7 @@ new class extends Component {
     @forelse ($this->selectedGroup->predictions ?? [] as $prediction)
       <x-card-prediction :link="route('predictions.show', $prediction->id)" :result="$prediction->result" :species="$prediction->species->name" :createdAt="$prediction->created_at" :successRate="$prediction->success_rate" />
     @empty
-        Empty
+      Empty
     @endforelse
   </div>
 

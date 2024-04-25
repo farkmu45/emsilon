@@ -1,8 +1,11 @@
 <?php
 
 use Livewire\Volt\Component;
+use App\Models\Group;
 
-new class extends Component {}; ?>
+new class extends Component {
+    public Group $group;
+}; ?>
 
 <div>
   <div class="text-center">
@@ -16,9 +19,9 @@ new class extends Component {}; ?>
 
   <h3 class="mt-16 text-xl font-bold">Group members</h3>
   <div class="mt-4">
-    <x-member-item />
-    <x-member-item />
-    <x-member-item />
+    @foreach ($this->group->members as $member)
+      <x-member-item :name="$member->user->name" />
+    @endforeach
   </div>
 
   <div class="mt-10 flex flex-col">
