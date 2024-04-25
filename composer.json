@@ -16,6 +16,7 @@
         "robsontenorio/mary": "1.26"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.13",
         "fakerphp/faker": "^1.9.1",
         "jeroenzwart/laravel-csv-seeder": "^1.6",
         "laravel/breeze": "^1.28",
