@@ -9,7 +9,7 @@
         </p>
         <div class="flex flex-row items-center gap-x-2 text-gray-500">
           <x-heroicon-o-sun class="h-5" />
-          <p class="text-sm">{{ $species }}</p>
+          <p class="text-sm">{{ \Illuminate\Support\Str::limit($species, 20) }}</p>
         </div>
         <div class="mt-1 flex flex-row items-center gap-x-2 text-gray-500">
           <x-heroicon-o-clock class="h-5" />
