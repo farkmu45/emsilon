@@ -22,7 +22,7 @@
       </div>
       <div>
         <p class="text-3xl font-extrabold">95%</p>
-        <p class="text-gray-500 text-sm">Success rate</p>
+        <p class="text-gray-500 text-sm">Suitability rate</p>
       </div>
     </div>
   </div>

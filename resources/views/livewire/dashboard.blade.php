@@ -29,7 +29,7 @@ new class extends Component {
   </div>
 
   <div class="mt-4 grid grid-cols-2 gap-x-4">
-    <x-stat value="44" title="Avg success rate" tooltip="Hello" />
+    <x-stat value="44" title="Avg suitability rate" tooltip="Hello" />
     <x-stat value="44" title="Total prediction" tooltip="Hello" />
   </div>
 
