@@ -24,11 +24,14 @@ new class extends Component {
 
         if ($this->predictionId) {
             $this->prediction = Prediction::find($this->predictionId);
-            $this->form->ems_concentration = $this->prediction->ems_concentration;
-            $this->form->first_soak_duration = $this->prediction->first_soak_duration;
-            $this->form->second_soak_duration = $this->prediction->second_soak_duration;
-            $this->form->lowest_temperature = $this->prediction->lowest_temperature;
-            $this->form->highest_temperature = $this->prediction->highest_temperature;
+
+            if ($this->prediction) {
+                $this->form->ems_concentration = $this->prediction->ems_concentration;
+                $this->form->first_soak_duration = $this->prediction->first_soak_duration;
+                $this->form->second_soak_duration = $this->prediction->second_soak_duration;
+                $this->form->lowest_temperature = $this->prediction->lowest_temperature;
+                $this->form->highest_temperature = $this->prediction->highest_temperature;
+            }
         }
     }
 
