@@ -45,8 +45,8 @@ new class extends Component {
   <div class="mt-4 grid gap-y-4">
     @foreach ($predictions as $prediction)
       <x-card-prediction result="{{ $prediction->result }}" species="{{ $prediction->species->name }}"
-        successRate="{{ $prediction->success_rate }}" createdAt="{{ $prediction->created_at }}"
-        link="{{ route('predictions.show', $prediction->id) }}" />
+        successRate="{{ $prediction->success_rate }}" success="{{ $prediction->result }}"
+        createdAt="{{ $prediction->created_at }}" link="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
   </div>
 

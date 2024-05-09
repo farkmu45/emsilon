@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="text-center">
-        <p class="text-3xl font-extrabold text-error">{{ $successRate }}%</p>
+        <p class="text-3xl font-extrabold {{ $result ? 'text-success' : 'text-error' }}">{{ $successRate }}%</p>
         <p class="text-sm text-gray-500">Suitability rate</p>
       </div>
     </div>
