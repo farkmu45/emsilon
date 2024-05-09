@@ -16,6 +16,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::component('custom-input', CustomInput::class);
         Blade::component('custom-select', CustomSelect::class);
+
+        Blade::directive('formatNum', function ($num) {
+            return "<?php echo number_format($num, 0, '', '.'); ?>";
+        });
     }
 
     /**
