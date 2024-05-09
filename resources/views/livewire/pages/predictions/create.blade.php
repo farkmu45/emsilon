@@ -3,18 +3,33 @@
 use Livewire\Volt\Component;
 use App\Livewire\Forms\PredictionForm;
 use App\Models\Species;
+use App\Models\Prediction;
+use Livewire\Attributes\Url;
 use Illuminate\Database\Eloquent\Collection;
 
 new class extends Component {
     public PredictionForm $form;
     public Collection $groups;
     public Collection $species;
+    public ?Prediction $prediction;
+
+    #[Url]
+    public ?int $predictionId = null;
 
     public function mount()
     {
         $this->species = Species::all();
         $this->groups = auth()->user()->groupsWithPersonal();
         $this->form->group_id = auth()->user()->personalGroup()->id;
+
+        if ($this->predictionId) {
+            $this->prediction = Prediction::find($this->predictionId);
+            $this->form->ems_concentration = $this->prediction->ems_concentration;
+            $this->form->first_soak_duration = $this->prediction->first_soak_duration;
+            $this->form->second_soak_duration = $this->prediction->second_soak_duration;
+            $this->form->lowest_temperature = $this->prediction->lowest_temperature;
+            $this->form->highest_temperature = $this->prediction->highest_temperature;
+        }
     }
 
     public function predict()
@@ -24,8 +39,8 @@ new class extends Component {
 }; ?>
 
 <div>
-  <h1 class="text-3xl font-bold">Create prediction</h1>
-  <h3 class="mt-2 text-lg font-medium text-neutral-600">Predict the suitability of treatment in another species</h3>
+  <h1 class="text-3xl font-bold text-gray-700">Create prediction</h1>
+  <h3 class="mt-2 text-lg font-medium text-gray-500">Predict the suitability of treatment in another species</h3>
 
   <div class="mt-5">
     <form class="flex flex-col" wire:submit="predict">
