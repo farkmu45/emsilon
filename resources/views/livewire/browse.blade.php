@@ -13,8 +13,8 @@ new class extends Component {
             'predictions' => Prediction::whereHas('group', fn($query) => $query->where('name', 'Personal')->whereNot('id', $personalGroup->id))
                 ->where('result', 1)
                 ->latest()
-                ->paginate($this->perPage)
-                ->items(),
+                ->take($this->perPage)
+                ->get(),
         ];
     }
 
@@ -39,7 +39,7 @@ new class extends Component {
     @endforeach
   </div>
 
-  @if (!$predictions)
+  @if (!count($predictions))
     <x-data-empty class="mt-24" />
   @endif
 
