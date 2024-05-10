@@ -5,16 +5,22 @@ use App\Models\Prediction;
 
 new class extends Component {
     public $perPage = 10;
-    public $predictions;
 
-    public function mount()
+    public function with(): array
     {
         $personalGroup = auth()->user()->personalGroup();
-        $this->predictions = Prediction::whereHas('group', fn($query) => $query->where('name', 'Personal')->whereNot('id', $personalGroup->id))
-            ->where('result', 1)
-            ->latest()
-            ->paginate($this->perPage)
-            ->items();
+        return [
+            'predictions' => Prediction::whereHas('group', fn($query) => $query->where('name', 'Personal')->whereNot('id', $personalGroup->id))
+                ->where('result', 0)
+                ->latest()
+                ->paginate($this->perPage)
+                ->items(),
+        ];
+    }
+
+    public function loadMore()
+    {
+        $this->perPage += 10;
     }
 }; ?>
 
@@ -24,9 +30,10 @@ new class extends Component {
 
   <div class="mt-10 grid gap-y-4 lg:grid-cols-3 lg:gap-x-3">
     @foreach ($predictions as $prediction)
-      <x-card-browse result="{{ $prediction->result }}" species="{{ $prediction->species->name }}"
-        suitabilityRate="{{ $prediction->success_rate }}" success="{{ $prediction->result }}"
-        createdAt="{{ $prediction->created_at }}" creator="{{ $prediction->user->name }}"
+      <x-card-browse wire:key="{{ $prediction->id }}" result="{{ $prediction->result }}"
+        species="{{ $prediction->species->name }}" suitabilityRate="{{ $prediction->success_rate }}"
+        success="{{ $prediction->result }}" createdAt="{{ $prediction->created_at }}"
+        creator="{{ $prediction->user->name }}"
         link="{{ route('predictions.create', ['predictionId' => $prediction->id]) }}"
         showLink="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
@@ -35,4 +42,8 @@ new class extends Component {
   @if (!$predictions)
     <x-data-empty class="mt-24" />
   @endif
+
+  <div class="flex w-full items-center justify-center p-12" x-intersect.full="$wire.loadMore()">
+    <x-loading class="loading-lg text-primary" wire:loading wire:target="loadMore" />
+  </div>
 </div>
