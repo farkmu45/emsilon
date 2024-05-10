@@ -3,6 +3,7 @@
 use Livewire\Volt\Component;
 use App\Models\Group;
 use App\Models\User;
+use App\Models\Member;
 use Mary\Traits\Toast;
 use Illuminate\Support\Facades\Gate;
 
@@ -13,6 +14,8 @@ new class extends Component {
     public int $leaderId;
     public bool $leaveModal = false;
     public bool $disbandModal = false;
+    public bool $removeModal = false;
+    public ?int $memberId = null;
 
     public function mount()
     {
@@ -28,6 +31,7 @@ new class extends Component {
             $this->leaveModal = false;
             $this->toast(type: 'success', title: 'You successfully left the group', position: 'toast-top toast-end', icon: 'o-check-circle', redirectTo: route('groups.index'));
         } catch (\Throwable $th) {
+            $this->leaveModal = false;
             $this->toast(type: 'error', title: 'An error occured while leaving the group', position: 'toast-top toast-end', icon: 'o-exclamation-circle');
         }
     }
@@ -35,13 +39,29 @@ new class extends Component {
     public function disband()
     {
         try {
-            $this->group->predictions()->where('user_id', auth()->user()->id)->delete();
+            $this->group
+                ->predictions()
+                ->where('user_id', auth()->user()->id)
+                ->delete();
             $this->group->members()->delete();
             $this->group->delete();
             $this->disbandModal = false;
             $this->toast(type: 'success', title: 'You successfully disbanded the group', position: 'toast-top toast-end', icon: 'o-check-circle', redirectTo: route('groups.index'));
         } catch (\Throwable $th) {
+            $this->disbandModal = false;
             $this->toast(type: 'error', title: 'An error occured while disbanding the group', position: 'toast-top toast-end', icon: 'o-exclamation-circle');
+        }
+    }
+
+    public function removeMember()
+    {
+        try {
+            Member::find($this->memberId)->delete();
+            $this->removeModal = false;
+            $this->toast(type: 'success', title: 'You successfully removed the member', position: 'toast-top toast-end', icon: 'o-check-circle');
+        } catch (\Throwable $th) {
+            $this->removeModal = false;
+            $this->toast(type: 'error', title: 'An error occured while removing the member', position: 'toast-top toast-end', icon: 'o-exclamation-circle');
         }
     }
 }; ?>
@@ -59,7 +79,8 @@ new class extends Component {
   <h3 class="mt-16 text-xl font-bold">Group members</h3>
   <div class="mt-4 flex flex-col gap-y-3">
     @foreach ($this->group->members()->orderBy('is_creator', 'desc')->get() as $member)
-      <x-member-item isCreator="{{ $member->user->id == $leaderId }}" :name="$member->user->name" />
+      <x-member-item :id="$member->id" wire:key="{{ $member->id }}" :showDeleteBtn="auth()->user()->id == $leaderId" :isCreator="$member->user->id == $leaderId"
+        :name="$member->user->name" />
     @endforeach
   </div>
 
@@ -89,6 +110,16 @@ new class extends Component {
     <x-slot:actions>
       <x-button @click="$wire.leaveModal = false" label="Cancel" />
       <x-button class="btn-error text-white" wire:click="leave" label="Leave" />
+    </x-slot:actions>
+  </x-modal>
+
+  {{-- Remove member modal --}}
+  <x-modal class="backdrop-blur" title="Are you sure?" wire:model="removeModal">
+    This member will not be able to create or view any predictions from this group again.
+
+    <x-slot:actions>
+      <x-button @click="$wire.removeModal = false" label="Cancel" />
+      <x-button class="btn-error text-white" wire:click="removeMember" label="Remove" />
     </x-slot:actions>
   </x-modal>
 </div>
