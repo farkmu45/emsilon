@@ -21,7 +21,7 @@ new class extends Component {
   <div class="mt-8 h-[30rem] rounded-md bg-white px-5 py-4 shadow-sm">
     <div>
       <p class="text-xs font-semibold uppercase tracking-wide text-gray-400">Suitability rate</p>
-      <p class="{{ $prediction->result ? 'text-success' : 'text-warning' }} mt-1 text-4xl font-bold">
+      <p class="{{ $prediction->result ? 'text-success' : 'text-error' }} mt-1 text-4xl font-bold">
         {{ $prediction->success_rate }}%</p>
     </div>
 

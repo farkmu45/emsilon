@@ -21,4 +21,9 @@ class Prediction extends Model
     {
         return $this->belongsTo(Species::class);
     }
+
+    public function group(): BelongsTo
+    {
+        return $this->belongsTo(Group::class);
+    }
 }
