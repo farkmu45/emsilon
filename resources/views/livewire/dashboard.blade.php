@@ -5,14 +5,18 @@ use App\Models\Prediction;
 new class extends Component {
     public $perPage = 10;
     public $predictions;
+    public $total = 0;
+    public $average = 0;
 
     public function mount()
     {
         $personalGroup = auth()->user()->personalGroup();
-        $this->predictions = Prediction::where('group_id', $personalGroup->id)
+        $predictions = Prediction::where('group_id', $personalGroup->id)
             ->latest()
-            ->paginate($this->perPage)
-            ->items();
+            ->paginate($this->perPage);
+        $this->predictions = $predictions->items();
+        $this->total = $predictions->total();
+        $this->average = round(Prediction::where('group_id', $personalGroup->id)->avg('success_rate'), 2);
     }
 }; ?>
 
@@ -20,7 +24,7 @@ new class extends Component {
   <div class="flex items-center">
     <div>
       <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
-      <h3 class="mt-2 text-neutral-600">Summary of your past analysis</h3>
+      <h3 class="mt-2 text-neutral-600">Summary of your past predictions</h3>
     </div>
     <a class="btn btn-primary fixed bottom-28 right-7 lg:static lg:ml-auto" href="{{ route('predictions.create') }}"
       icon="o-cube-transparent">
@@ -29,8 +33,8 @@ new class extends Component {
   </div>
 
   <div class="mt-4 grid grid-cols-2 gap-x-4">
-    <x-stat value="44" title="Avg suitability rate" tooltip="Hello" />
-    <x-stat value="44" title="Total prediction" tooltip="Hello" />
+    <x-stat :value="$average. '%'" title="Avg suitability rate"/>
+    <x-stat :value="$total" title="Total prediction" />
   </div>
 
   <div class="mt-10 flex justify-between">
