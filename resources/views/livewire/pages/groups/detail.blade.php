@@ -3,13 +3,31 @@
 use Livewire\Volt\Component;
 use App\Models\Group;
 use App\Models\User;
+use Mary\Traits\Toast;
 
 new class extends Component {
+    use Toast;
+
     public Group $group;
     public int $leaderId;
+    public bool $leaveModal = false;
 
-    public function mount() {
+    public function mount()
+    {
         $this->leaderId = $this->group->members->where('is_creator', true)->first()->user_id;
+    }
+
+    public function leave()
+    {
+        try {
+            $member = $this->group->members->where('user_id', auth()->user()->id)->first();
+            $member->delete();
+            $this->createModal = false;
+            redirect(route('groups.index'));
+            $this->toast(type: 'success', title: 'You successfully left the group', position: 'toast-top toast-end', icon: 'o-check-circle', redirectTo: route('groups.index'));
+        } catch (\Throwable $th) {
+            $this->toast(type: 'error', title: 'An error occured while leaving the group', position: 'toast-top toast-end', icon: 'o-exclamation-mark');
+        }
     }
 }; ?>
 
@@ -32,7 +50,11 @@ new class extends Component {
 
   <div class="mt-10 flex flex-col">
     <a class="btn btn-primary" href="">Invite friends</a>
-    <button class="btn btn-error mt-3 text-white" onclick="disbandModal.showModal()">Disband group</button>
+    @if ($leaderId == auth()->user()->id)
+      <button class="btn btn-error mt-3 text-white" onclick="disbandModal.showModal()">Disband group</button>
+    @else
+      <button class="btn btn-error mt-3 text-white" @click="$wire.leaveModal = true">Leave group</button>
+    @endif
   </div>
 
 
@@ -44,6 +66,16 @@ new class extends Component {
       {{-- Notice `onclick` is HTML --}}
       <x-button label="Cancel" onclick="disbandModal.close()" />
       <x-button class="btn-primary" label="Confirm" />
+    </x-slot:actions>
+  </x-modal>
+
+  {{-- Leave group modal --}}
+  <x-modal class="backdrop-blur" title="Are you sure?" wire:model="leaveModal">
+    You will not be able to create any predictions for this group again.
+
+    <x-slot:actions>
+      <x-button @click="$wire.leaveModal = false" label="Cancel" onclick="leaveModal.close()" />
+      <x-button class="btn-primary" wire:click="leave" label="Yes" />
     </x-slot:actions>
   </x-modal>
 </div>
