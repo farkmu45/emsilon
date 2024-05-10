@@ -4,6 +4,7 @@ use Livewire\Volt\Component;
 use App\Models\Group;
 use App\Models\User;
 use Mary\Traits\Toast;
+use Illuminate\Support\Facades\Gate;
 
 new class extends Component {
     use Toast;
@@ -14,6 +15,7 @@ new class extends Component {
 
     public function mount()
     {
+        Gate::authorize('view', $this->group);
         $this->leaderId = $this->group->members->where('is_creator', true)->first()->user_id;
     }
 
