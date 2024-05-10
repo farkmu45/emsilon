@@ -11,7 +11,7 @@ new class extends Component {
         $personalGroup = auth()->user()->personalGroup();
         return [
             'predictions' => Prediction::whereHas('group', fn($query) => $query->where('name', 'Personal')->whereNot('id', $personalGroup->id))
-                ->where('result', 0)
+                ->where('result', 1)
                 ->latest()
                 ->paginate($this->perPage)
                 ->items(),
