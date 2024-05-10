@@ -21,7 +21,7 @@ class GroupPolicy
      */
     public function view(User $user, Group $group): bool
     {
-        return $group->members->where('user_id', $user->id)->count();
+        return $group->members->where('user_id', $user->id);
     }
 
     /**
@@ -29,6 +29,6 @@ class GroupPolicy
      */
     public function delete(User $user, Group $group): bool
     {
-        return true;
+        //
     }
 }

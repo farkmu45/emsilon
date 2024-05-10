@@ -12,6 +12,7 @@ new class extends Component {
     public Group $group;
     public int $leaderId;
     public bool $leaveModal = false;
+    public bool $disbandModal = false;
 
     public function mount()
     {
@@ -24,11 +25,23 @@ new class extends Component {
         try {
             $member = $this->group->members->where('user_id', auth()->user()->id)->first();
             $member->delete();
-            $this->createModal = false;
-            redirect(route('groups.index'));
+            $this->leaveModal = false;
             $this->toast(type: 'success', title: 'You successfully left the group', position: 'toast-top toast-end', icon: 'o-check-circle', redirectTo: route('groups.index'));
         } catch (\Throwable $th) {
-            $this->toast(type: 'error', title: 'An error occured while leaving the group', position: 'toast-top toast-end', icon: 'o-exclamation-mark');
+            $this->toast(type: 'error', title: 'An error occured while leaving the group', position: 'toast-top toast-end', icon: 'o-exclamation-circle');
+        }
+    }
+
+    public function disband()
+    {
+        try {
+            $this->group->predictions()->where('user_id', auth()->user()->id)->delete();
+            $this->group->members()->delete();
+            $this->group->delete();
+            $this->disbandModal = false;
+            $this->toast(type: 'success', title: 'You successfully disbanded the group', position: 'toast-top toast-end', icon: 'o-check-circle', redirectTo: route('groups.index'));
+        } catch (\Throwable $th) {
+            $this->toast(type: 'error', title: 'An error occured while disbanding the group', position: 'toast-top toast-end', icon: 'o-exclamation-circle');
         }
     }
 }; ?>
@@ -53,7 +66,7 @@ new class extends Component {
   <div class="mt-10 flex flex-col">
     <a class="btn btn-primary" href="">Invite friends</a>
     @if ($leaderId == auth()->user()->id)
-      <button class="btn btn-error mt-3 text-white" onclick="disbandModal.showModal()">Disband group</button>
+      <button class="btn btn-error mt-3 text-white" @click="$wire.disbandModal = true">Disband group</button>
     @else
       <button class="btn btn-error mt-3 text-white" @click="$wire.leaveModal = true">Leave group</button>
     @endif
@@ -61,13 +74,12 @@ new class extends Component {
 
 
   {{-- Disband group modal --}}
-  <x-modal id="disbandModal" title="Are you sure?">
+  <x-modal class="backdrop-blur" title="Are you sure?" wire:model="disbandModal">
     All predictions created will be deleted permanently.
 
     <x-slot:actions>
-      {{-- Notice `onclick` is HTML --}}
-      <x-button label="Cancel" onclick="disbandModal.close()" />
-      <x-button class="btn-primary" label="Confirm" />
+      <x-button @click="$wire.disbandModal = false" label="Cancel" />
+      <x-button class="btn-error text-white" label="Disband" wire:click="disband" />
     </x-slot:actions>
   </x-modal>
 
@@ -76,8 +88,8 @@ new class extends Component {
     You will not be able to create any predictions for this group again.
 
     <x-slot:actions>
-      <x-button @click="$wire.leaveModal = false" label="Cancel" onclick="leaveModal.close()" />
-      <x-button class="btn-primary" wire:click="leave" label="Yes" />
+      <x-button @click="$wire.leaveModal = false" label="Cancel" />
+      <x-button class="btn-error text-white" wire:click="leave" label="Leave" />
     </x-slot:actions>
   </x-modal>
 </div>
