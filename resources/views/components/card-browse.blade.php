@@ -1,9 +1,10 @@
-@props(['result', 'creator', 'species', 'suitabilityRate', 'creator', 'createdAt', 'link'])
+@props(['result', 'showLink', 'creator', 'species', 'suitabilityRate', 'creator', 'createdAt', 'link'])
 
-<x-card>
+<x-card href="test">
   <div class="flex items-center justify-between">
     <div>
-      <p class="mb-4 font-medium">{{ \Illuminate\Support\Str::limit($species, 20) }}</p>
+      <a class="link mb-4 block font-medium"
+        href="{{ $showLink }}">{{ \Illuminate\Support\Str::limit($species, 20) }}</a>
       <div class="flex flex-row items-center gap-x-2 text-gray-500">
         <x-heroicon-o-user class="h-5" />
         <p class="text-sm">{{ $creator }}</p>

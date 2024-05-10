@@ -27,7 +27,8 @@ new class extends Component {
       <x-card-browse result="{{ $prediction->result }}" species="{{ $prediction->species->name }}"
         suitabilityRate="{{ $prediction->success_rate }}" success="{{ $prediction->result }}"
         createdAt="{{ $prediction->created_at }}" creator="{{ $prediction->user->name }}"
-        link="{{ route('predictions.create', ['predictionId' => $prediction->id]) }}" />
+        link="{{ route('predictions.create', ['predictionId' => $prediction->id]) }}"
+        showLink="{{route('predictions.show', $prediction->id)}}"/>
     @endforeach
   </div>
 </div>
