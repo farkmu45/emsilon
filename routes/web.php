@@ -16,7 +16,7 @@ use Livewire\Volt\Volt;
 
 Route::view('/', 'welcome');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Volt::route('dashboard', 'dashboard')
         ->name('dashboard');
 
