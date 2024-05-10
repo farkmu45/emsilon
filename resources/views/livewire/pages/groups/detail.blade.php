@@ -2,9 +2,15 @@
 
 use Livewire\Volt\Component;
 use App\Models\Group;
+use App\Models\User;
 
 new class extends Component {
     public Group $group;
+    public int $leaderId;
+
+    public function mount() {
+        $this->leaderId = $this->group->members->where('is_creator', true)->first()->user_id;
+    }
 }; ?>
 
 <div>
@@ -18,9 +24,9 @@ new class extends Component {
   </div>
 
   <h3 class="mt-16 text-xl font-bold">Group members</h3>
-  <div class="mt-4">
-    @foreach ($this->group->members as $member)
-      <x-member-item :name="$member->user->name" />
+  <div class="mt-4 flex flex-col gap-y-3">
+    @foreach ($this->group->members()->orderBy('is_creator', 'desc')->get() as $member)
+      <x-member-item isCreator="{{ $member->user->id == $leaderId }}" :name="$member->user->name" />
     @endforeach
   </div>
 
