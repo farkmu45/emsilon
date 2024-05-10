@@ -3,7 +3,6 @@ use Livewire\Volt\Component;
 use App\Models\Prediction;
 
 new class extends Component {
-    public $perPage = 10;
     public $predictions;
     public $total = 0;
     public $average = 0;
@@ -13,11 +12,12 @@ new class extends Component {
         $personalGroup = auth()->user()->personalGroup();
         $predictions = Prediction::where('group_id', $personalGroup->id)
             ->latest()
-            ->paginate($this->perPage);
+            ->paginate(5);
         $this->predictions = $predictions->items();
         $this->total = $predictions->total();
         $this->average = round(Prediction::where('group_id', $personalGroup->id)->avg('success_rate'), 2);
     }
+
 }; ?>
 
 <div>
@@ -26,7 +26,7 @@ new class extends Component {
       <h1 class="text-3xl font-bold">Hi {{ head(explode(' ', trim(auth()->user()->name))) }}</h1>
       <h3 class="mt-2 text-neutral-600">Summary of your past predictions</h3>
     </div>
-    <a class="btn btn-primary fixed bottom-28 right-7 lg:static lg:ml-auto" href="{{ route('predictions.create') }}"
+    <a class="btn btn-primary fixed bottom-28 right-7 z-10 lg:static lg:ml-auto" href="{{ route('predictions.create') }}"
       icon="o-cube-transparent">
       Predict
     </a>
@@ -48,14 +48,14 @@ new class extends Component {
 
   <div class="mt-4 grid gap-y-4">
     @foreach ($predictions as $prediction)
-      <x-card-prediction result="{{ $prediction->result }}" species="{{ $prediction->species->name }}"
-        successRate="{{ $prediction->success_rate }}" success="{{ $prediction->result }}"
-        createdAt="{{ $prediction->created_at }}" link="{{ route('predictions.show', $prediction->id) }}" />
+      <x-card-prediction wire:key="{{ $prediction->id }}" result="{{ $prediction->result }}"
+        species="{{ $prediction->species->name }}" successRate="{{ $prediction->success_rate }}"
+        success="{{ $prediction->result }}" createdAt="{{ $prediction->created_at }}"
+        link="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
   </div>
 
   @if (!$predictions)
     <x-data-empty class="mt-20" label="No predictions available" />
   @endif
-
 </div>
