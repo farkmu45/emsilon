@@ -73,11 +73,11 @@ new #[Layout('components.layouts.guest')] class extends Component {
 <div>
   <form class="grid gap-y-5" wire:submit="login">
     <x-custom-input label="Email" wire:model="email" autofocus required />
-    <x-custom-input label="Password" type="password" wire:model="password" required />
+    <x-custom-input type="password" label="Password" wire:model="password" required />
     <div class="flex justify-between">
-      <x-toggle label="Remember me" wire:model="remember" />
+      <x-toggle class="text-gray-600" label="Remember me" wire:model="remember" />
 
-      <a class="link ml-auto no-underline" href="{{ route('password.request') }}">
+      <a class="link ml-auto text-gray-600 no-underline" href="{{ route('password.request') }}">
         Forgot password?
       </a>
     </div>
@@ -86,7 +86,7 @@ new #[Layout('components.layouts.guest')] class extends Component {
     <x-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-button>
     <x-button type="submit" spinner="googleLogin">Login with Google</x-button>
 
-    <a class="link ml-auto mt-4 no-underline" href="{{ route('register') }}">
+    <a class="link ml-auto mt-4 text-gray-600 no-underline" href="{{ route('register') }}">
       Create new account
     </a>
   </form>
