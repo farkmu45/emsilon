@@ -2,13 +2,14 @@
 
 use Livewire\Volt\Component;
 use App\Models\Prediction;
+use Illuminate\Support\Facades\Gate;
 
 new class extends Component {
     public Prediction $prediction;
 
-    public function mount(Prediction $prediction)
+    public function mount()
     {
-        $this->prediction = $prediction;
+        Gate::authorize('view', $this->prediction);
     }
 }; ?>
 
