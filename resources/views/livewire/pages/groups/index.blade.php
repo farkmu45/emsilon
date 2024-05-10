@@ -60,10 +60,9 @@ new class extends Component {
 }; ?>
 
 <div>
-    <button class="btn btn-primary fixed bottom-28 right-7 ml-auto lg:right-24"
-      @click="$wire.joinGroupModal = true">
-      Join Group
-    </button>
+  <button class="btn btn-primary fixed bottom-28 right-7 ml-auto lg:right-24" @click="$wire.joinGroupModal = true">
+    Join Group
+  </button>
   <div class="flex items-center">
     <h1 class="text-3xl font-bold">Your Groups</h1>
     <a class="link mb-6 ml-auto font-medium text-primary no-underline"
@@ -89,12 +88,14 @@ new class extends Component {
   </div>
 
   <div class="mt-10 grid gap-4 lg:grid-cols-3">
-    @forelse ($this->selectedGroup->predictions ?? [] as $prediction)
+    @foreach ($this->selectedGroup->predictions ?? [] as $prediction)
       <x-card-prediction :link="route('predictions.show', $prediction->id)" :result="$prediction->result" :species="$prediction->species->name" :createdAt="$prediction->created_at" :successRate="$prediction->success_rate" />
-    @empty
-      Empty
-    @endforelse
+    @endforeach
   </div>
+
+  @if (!$this->selectedGroup?->predictions)
+    <x-data-empty class="mt-10"/>
+  @endif
 
   {{-- Create group modal --}}
   <x-modal class="backdrop-blur" title="Create new group" wire:model="createModal">

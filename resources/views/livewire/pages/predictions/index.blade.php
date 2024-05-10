@@ -24,4 +24,8 @@ new class extends Component {
         createdAt="{{ $prediction->created_at }}" link="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
   </div>
+
+  @if (!count($predictions))
+    <x-data-empty class="mt-24"/>
+  @endif
 </div>

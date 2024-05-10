@@ -33,8 +33,8 @@ new class extends Component {
   </div>
 
   <div class="mt-4 grid grid-cols-2 gap-x-4">
-    <x-stat :value="$average. '%'" title="Avg suitability rate"/>
-    <x-stat :value="$total" title="Total prediction" />
+    <x-stat title="Avg suitability rate" :value="$average . '%'" />
+    <x-stat title="Total prediction" :value="$total" />
   </div>
 
   <div class="mt-10 flex justify-between">
@@ -53,5 +53,9 @@ new class extends Component {
         createdAt="{{ $prediction->created_at }}" link="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
   </div>
+
+  @if (!$predictions)
+      <x-data-empty class="mt-20"/>
+  @endif
 
 </div>

@@ -18,7 +18,7 @@ new class extends Component {
     }
 }; ?>
 
-<div>
+<div class="w-full">
   <h1 class="text-3xl font-bold">Browse</h1>
   <h3 class="mt-2 text-lg font-medium text-neutral-600">Find any mutagenesis treatment to use as prediction base</h3>
 
@@ -28,7 +28,11 @@ new class extends Component {
         suitabilityRate="{{ $prediction->success_rate }}" success="{{ $prediction->result }}"
         createdAt="{{ $prediction->created_at }}" creator="{{ $prediction->user->name }}"
         link="{{ route('predictions.create', ['predictionId' => $prediction->id]) }}"
-        showLink="{{route('predictions.show', $prediction->id)}}"/>
+        showLink="{{ route('predictions.show', $prediction->id) }}" />
     @endforeach
   </div>
+
+  @if (!$predictions)
+    <x-data-empty class="mt-24" />
+  @endif
 </div>
