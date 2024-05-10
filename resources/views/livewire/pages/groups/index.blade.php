@@ -60,15 +60,17 @@ new class extends Component {
 }; ?>
 
 <div>
-  <div class="flex items-center">
-    <h1 class="text-3xl font-bold">Your Groups</h1>
-    <button class="btn btn-primary fixed bottom-28 right-7 ml-auto lg:static lg:ml-auto"
+    <button class="btn btn-primary fixed bottom-28 right-7 ml-auto lg:right-24"
       @click="$wire.joinGroupModal = true">
       Join Group
     </button>
+  <div class="flex items-center">
+    <h1 class="text-3xl font-bold">Your Groups</h1>
+    <a class="link mb-6 ml-auto font-medium text-primary no-underline"
+      href="{{ $this->selectedGroup ? route('groups.detail', $this->selectedGroup->id) : '/groups/#' }}">Edit group</a>
   </div>
 
-  <div class="mt-5 flex items-center">
+  <div class="mt-5 flex items-center overflow-x-scroll pt-2">
     <button class="flex w-20 flex-col items-center" @click="$wire.createModal = true">
       <div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary">
         <x-icon class="h-7 w-7 text-white" name="o-plus" />
@@ -84,8 +86,6 @@ new class extends Component {
         wire:key="{{ $group->id }}" />
     @endforeach
 
-    <a class="link mb-6 ml-auto font-medium text-primary no-underline"
-      href="{{ $this->selectedGroup ? route('groups.detail', $this->selectedGroup->id) : '/groups/#' }}">Edit group</a>
   </div>
 
   <div class="mt-10 grid gap-4 lg:grid-cols-3">
