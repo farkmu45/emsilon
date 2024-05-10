@@ -93,8 +93,8 @@ new class extends Component {
     @endforeach
   </div>
 
-  @if (!$this->selectedGroup?->predictions)
-    <x-data-empty class="mt-10" label="You don't have any group"/>
+  @if (!count($this->selectedGroup?->predictions ?? []))
+    <x-data-empty class="mt-10" label="Data unavailable" />
   @endif
 
   {{-- Create group modal --}}
@@ -105,12 +105,12 @@ new class extends Component {
 
     <x-slot:actions>
       <x-button @click="$wire.createModal = false" label="Cancel" onclick="createModal.close()" />
-      <x-button class="btn-primary" wire:click="create" label="Submit" />
+      <x-button class="btn-primary" spinner="create" wire:click="create" label="Submit" />
     </x-slot:actions>
   </x-modal>
 
 
-  {{-- Create group modal --}}
+  {{-- Join group modal --}}
   <x-modal class="backdrop-blur" title="Join group via code" wire:model="joinGroupModal">
     <form method="post" wire:submit="create">
       <x-custom-input label="Enter code" wire:model="joinGroupForm.code" autofocus required />
@@ -118,7 +118,7 @@ new class extends Component {
 
     <x-slot:actions>
       <x-button @click="$wire.joinGroupModal = false" label="Cancel" onclick="joinGroupModal.close()" />
-      <x-button class="btn-primary" wire:click="join" label="Join group" />
+      <x-button class="btn-primary" spinner="join" wire:click="join" label="Join group" />
     </x-slot:actions>
   </x-modal>
 </div>

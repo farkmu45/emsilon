@@ -99,7 +99,7 @@ new class extends Component {
 
     <x-slot:actions>
       <x-button @click="$wire.disbandModal = false" label="Cancel" />
-      <x-button class="btn-error text-white" label="Disband" wire:click="disband" />
+      <x-button class="btn-error text-white" spinner="disband" label="Disband" wire:click="disband" />
     </x-slot:actions>
   </x-modal>
 
@@ -109,7 +109,7 @@ new class extends Component {
 
     <x-slot:actions>
       <x-button @click="$wire.leaveModal = false" label="Cancel" />
-      <x-button class="btn-error text-white" wire:click="leave" label="Leave" />
+      <x-button class="btn-error text-white" spinner="leave" wire:click="leave" label="Leave" />
     </x-slot:actions>
   </x-modal>
 
@@ -119,7 +119,7 @@ new class extends Component {
 
     <x-slot:actions>
       <x-button @click="$wire.removeModal = false" label="Cancel" />
-      <x-button class="btn-error text-white" wire:click="removeMember" label="Remove" />
+      <x-button class="btn-error text-white" spinner="removeMember" wire:click="removeMember" label="Remove" />
     </x-slot:actions>
   </x-modal>
 </div>
