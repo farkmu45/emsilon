@@ -26,6 +26,6 @@ new class extends Component {
   </div>
 
   @if (!count($predictions))
-    <x-data-empty class="mt-24"/>
+    <x-data-empty class="mt-24" label="No predictions available"/>
   @endif
 </div>

@@ -55,7 +55,7 @@ new class extends Component {
   </div>
 
   @if (!$predictions)
-      <x-data-empty class="mt-20"/>
+    <x-data-empty class="mt-20" label="No predictions available" />
   @endif
 
 </div>

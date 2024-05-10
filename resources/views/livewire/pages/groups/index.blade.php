@@ -94,7 +94,7 @@ new class extends Component {
   </div>
 
   @if (!$this->selectedGroup?->predictions)
-    <x-data-empty class="mt-10"/>
+    <x-data-empty class="mt-10" label="You don't have any group"/>
   @endif
 
   {{-- Create group modal --}}
