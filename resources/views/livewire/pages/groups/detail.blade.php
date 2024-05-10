@@ -64,7 +64,6 @@ new class extends Component {
   </div>
 
   <div class="mt-10 flex flex-col">
-    <a class="btn btn-primary" href="">Invite friends</a>
     @if ($leaderId == auth()->user()->id)
       <button class="btn btn-error mt-3 text-white" @click="$wire.disbandModal = true">Disband group</button>
     @else
