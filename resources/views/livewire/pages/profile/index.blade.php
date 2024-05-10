@@ -31,7 +31,7 @@ new class extends Component {
   <div class="mt-10 grid md:grid-cols-2">
     {{-- Avatar --}}
     <div class="flex flex-col items-center">
-      <div class="h-40 w-40 rounded-full bg-red-700"></div>
+      <img class="h-40 w-40 rounded-full" src="https://ui-avatars.com/api/?name={{ auth()->user()->name }}" />
       <p class="mt-5 text-2xl font-semibold">{{ auth()->user()->name }}</p>
     </div>
     {{-- Form --}}
