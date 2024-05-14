@@ -27,10 +27,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
         $this->redirect(session('url.intended', RouteServiceProvider::HOME));
     }
 
-    public function googleLogin(): void
-    {
-    }
-
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
@@ -84,7 +80,6 @@ new #[Layout('components.layouts.guest')] class extends Component {
 
 
     <x-button class="btn-primary mt-10" type="submit" spinner="login">Login</x-button>
-    <x-button type="submit" spinner="googleLogin">Login with Google</x-button>
 
     <a class="link ml-auto mt-4 text-gray-600 no-underline" href="{{ route('register') }}">
       Create new account
