@@ -56,14 +56,14 @@ class PredictionForm extends Form
         if ($created) {
             throw ToastException::success(
                 title: 'Prediction created successfully',
-                position: 'toast-top toast-end',    // optional (daisyUI classes)
-                icon: 'o-information-circle',       // Optional (any icon)
+                position: 'toast-top toast-end',
+                icon: 'o-check-circle',
             );
         } else {
             throw ToastException::error(
                 title: 'An error occured while creating prediction',
-                position: 'toast-top toast-end',    // optional (daisyUI classes)
-                icon: 'o-information-circle',       // Optional (any icon)
+                position: 'toast-top toast-end',
+                icon: 'o-information-circle',
             );
         }
     }
