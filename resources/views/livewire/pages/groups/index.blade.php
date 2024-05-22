@@ -63,9 +63,9 @@ new class extends Component {
   <button class="btn btn-primary fixed bottom-28 right-7 ml-auto lg:right-24" @click="$wire.joinGroupModal = true">
     Join Group
   </button>
-  <div class="flex items-center">
+  <div class="flex items-center justify-between">
     <h1 class="text-3xl font-bold">Your Groups</h1>
-    <a class="link mb-6 ml-auto font-medium text-primary no-underline"
+    <a class="link font-medium text-primary no-underline"
       href="{{ $this->selectedGroup ? route('groups.detail', $this->selectedGroup->id) : '/groups/#' }}">Edit group</a>
   </div>
 
