@@ -14,7 +14,6 @@ return [
      *
      * Make sure to clear view cache after renaming
      *    php artisan view:clear
-     *
      */
     'prefix' => '',
 
@@ -24,7 +23,6 @@ return [
     'components' => [
         'spotlight' => [
             'class' => 'App\Support\Spotlight',
-        ]
-    ]
+        ],
+    ],
 ];
-

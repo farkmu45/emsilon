@@ -11,7 +11,6 @@ use Mary\Exceptions\ToastException;
 
 class PredictionForm extends Form
 {
-
     #[Validate('required|numeric')]
     public float $ems_concentration = 0;
 
@@ -30,10 +29,8 @@ class PredictionForm extends Form
     #[Validate('required|numeric|exists:species,id')]
     public int $species_id = 1;
 
-
     #[Validate('required|numeric|exists:groups,id')]
     public ?int $group_id = null;
-
 
     public function predict()
     {

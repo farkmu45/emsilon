@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Group;
-use App\Models\Member;
 use App\Models\Species;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;

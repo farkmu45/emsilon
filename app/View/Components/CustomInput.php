@@ -27,7 +27,7 @@ class CustomInput extends Component
         public mixed $prepend = null,
         public mixed $append = null
     ) {
-        $this->uuid = "mary" . md5(serialize($this));
+        $this->uuid = 'mary'.md5(serialize($this));
     }
 
     public function modelName(): ?string
@@ -40,8 +40,8 @@ class CustomInput extends Component
         return json_encode([
             'init' => true,
             'maskOpts' => [
-                'locales' => $this->locale
-            ]
+                'locales' => $this->locale,
+            ],
         ]);
     }
 

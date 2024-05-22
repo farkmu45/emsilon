@@ -12,7 +12,8 @@ class Group extends Model
 
     protected $guarded = ['id'];
 
-    public function members() : HasMany {
+    public function members(): HasMany
+    {
         return $this->hasMany(Member::class);
     }
 

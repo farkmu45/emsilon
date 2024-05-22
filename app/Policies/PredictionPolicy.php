@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Prediction;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class PredictionPolicy
 {
@@ -12,6 +11,7 @@ class PredictionPolicy
     {
         $groups = $user->groups()->pluck('id')->toArray() ?? null;
         $groupId = $prediction->group->id;
+
         return $prediction->group->name == 'Personal' || in_array($groupId, $groups);
     }
 }

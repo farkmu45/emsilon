@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Group;
-use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -24,11 +23,12 @@ class JoinGroupForm extends Form
 
         if (in_array($group->id, $userGroups)) {
             $this->addError('code', 'You already joined this group');
+
             return false;
         } else {
             $result = $group->members()->create([
                 'user_id' => auth()->user()->id,
-                'is_creator' => false
+                'is_creator' => false,
             ]);
 
             $this->reset();
@@ -37,7 +37,6 @@ class JoinGroupForm extends Form
                 return true;
             }
         }
-
 
         return false;
     }

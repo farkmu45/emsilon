@@ -2,11 +2,8 @@
 
 namespace App\Models;
 
-
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -38,12 +35,13 @@ class User extends Authenticatable implements MustVerifyEmail
             Member::create([
                 'group_id' => $group->id,
                 'user_id' => $user->id,
-                'is_creator' => true
+                'is_creator' => true,
             ]);
         });
     }
 
-    public function personalGroup() {
+    public function personalGroup()
+    {
         return Group::whereIn(
             'id',
             Member::where('user_id', $this->id)
@@ -62,7 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
         )->where('name', '!=', 'Personal')->get();
     }
 
-    public function groupsWithPersonal() {
+    public function groupsWithPersonal()
+    {
         return Group::whereIn(
             'id',
             Member::where('user_id', $this->id)

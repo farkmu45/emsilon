@@ -3,7 +3,6 @@
 namespace App\Livewire\Forms;
 
 use App\Models\Group;
-use App\Models\Member;
 use Livewire\Attributes\Validate;
 use Livewire\Form;
 
@@ -18,12 +17,12 @@ class GroupCreateForm extends Form
 
         $group = Group::create([
             'name' => $this->name,
-            'code' => random_int(100000, 999999)
+            'code' => random_int(100000, 999999),
         ]);
 
         $member = $group->members()->create([
             'user_id' => auth()->user()->id,
-            'is_creator' => true
+            'is_creator' => true,
         ]);
 
         $this->reset();
